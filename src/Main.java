@@ -28,13 +28,11 @@ public class Main {
                 .collect(Collectors.toList());
         System.out.println(person1);
         List<Person> persone2 = persons.stream()
-                .filter(person -> person.getAge() >= 18 && person.getAge() <= 60
-                        && person.getSex() == Sex.WOMAN && person.getEducation() == Education.HIGHER
-                        || person.getAge() >= 18 && person.getAge() <= 65
-                        && person.getSex() == Sex.MAN && person.getEducation() == Education.HIGHER)
-                .sorted(Comparator.comparing(person -> person.getFamily()))
-                .collect(Collectors.toList());
-        System.out.println(persone2);
+                .filter(person -> person.getEducation() == Education.HIGHER)
+                .filter(person -> person.getAge() >= 18)
+                .filter(person -> person.getSex() == Sex.WOMAN ? person.getAge() <= 60 : person.getAge() <= 65)
+                .sorted(Comparator.comparing(Person::getFamily))
+                .toList();
 
 
     }
